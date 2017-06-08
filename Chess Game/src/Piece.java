@@ -1,7 +1,11 @@
+import java.awt.Image;
+
 
 public abstract class Piece { // decorator
 	
 	String piece = "Piece";
+	String colors = "Color";
+	Image image;
 	int xMove = 0;
 	int yMove = 0;
 	int [][] moveSet = new int [xMove][yMove];
@@ -17,6 +21,12 @@ public abstract class Piece { // decorator
 	{
 		
 		return moveSet;
+		
+	}
+	public Image getImage()
+	{
+		
+		return image;
 		
 	}
 	void dead()

@@ -44,25 +44,17 @@ public class GameManager {//singleton
 	}
 	JFrame createBoard(JFrame frame, JButton tile)
 	{
-		Image whitePawnImage;
+		Pawn whitepawn = new Pawn("White");
+		Pawn blackpawn = new Pawn("Black");
+		Image wpawn = whitepawn.getImage();
+		Image bpawn = blackpawn.getImage();
 		JButton [][] grid = new JButton [8][8];
 		frame = new JFrame("Chess");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setSize(750, 750);
 		
-		try
-		{
-			
-			whitePawnImage = ImageIO.read(getClass().getResource("Images/White_pawn.png"));
-			tile.setIcon(new ImageIcon(whitePawnImage));
-		}
-		catch(Exception ex)
-		{
-			
-			System.out.println("Image did not work");
-			
-		}
+		
 		for(int i = 0; i < grid.length; i++) //sets tile buttons
 		{
 			
@@ -73,7 +65,6 @@ public class GameManager {//singleton
 				if((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0))
 				{
 					
-					
 					tile.setBackground(Color.white);
 					
 				}
@@ -83,6 +74,17 @@ public class GameManager {//singleton
 					tile.setBackground(Color.gray);
 					
 				}
+				if(i == 1) //sets white pawns
+				{
+					
+					tile.setIcon(new ImageIcon(wpawn));
+					
+				}
+				else if(i == 6)
+				{
+					
+					tile.setIcon(new ImageIcon(bpawn));
+				}
 						
 			}
 		}
@@ -91,7 +93,7 @@ public class GameManager {//singleton
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
-		return frame;
+		return frame;	
 		
 	}
 

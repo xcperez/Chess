@@ -1,0 +1,43 @@
+import java.awt.Image;
+
+import javax.imageio.ImageIO;
+
+
+public class Pawn extends Piece{
+	
+	
+	public Pawn()
+	{
+		
+		piece = "P";
+		
+	}
+	public int[][] getMoveSet()
+	{
+		int [][] moveSet = new int [0][1];
+		
+		return moveSet;
+		
+	}
+	
+	public Image getImage()
+	{
+		Image whitePawnImage = null;
+		try
+		{
+			
+			whitePawnImage = ImageIO.read(getClass().getResource("White_pawn.png"));
+			
+		}
+		catch(Exception ex)
+		{
+			
+			System.out.println("Image did not work");
+			
+		}
+		return whitePawnImage;
+		
+	}
+	
+
+}
