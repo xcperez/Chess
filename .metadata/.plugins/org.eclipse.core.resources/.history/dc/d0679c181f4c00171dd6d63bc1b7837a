@@ -60,7 +60,7 @@ public class GameManager {//singleton
 		catch(Exception ex)
 		{
 			
-			System.out.println("Image did not work");
+			System.out.println("Fuck");
 			
 		}
 		for(int i = 0; i < grid.length; i++) //sets tile buttons
