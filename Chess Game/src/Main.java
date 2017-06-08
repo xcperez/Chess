@@ -3,9 +3,9 @@ public class Main {
 	
 	public static void main(String[]args)
 	{
+		GameManager manager = new GameManager();
+		manager.createGame();
 		
-		Board chessBoard = new Board();
-		chessBoard.createBoard();
 		
 	}
 
