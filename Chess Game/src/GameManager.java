@@ -46,9 +46,32 @@ public class GameManager {//singleton
 	{
 		Pawn whitepawn = new Pawn("White");
 		Pawn blackpawn = new Pawn("Black");
+		Rook whiteRook = new Rook("White");
+		Rook blackRook = new Rook("Black");
+		Knight whiteKnight = new Knight("White");
+		Knight blackKnight = new Knight("Black");
+		Bishop whiteBishop = new Bishop("White");
+		Bishop blackBishop = new Bishop("Black");
+		Queen whiteQueen = new Queen("White");
+		Queen blackQueen = new Queen("Black");
+		King whiteKing = new King("White");
+		King blackKing = new King ("Black");
+		
 		Image wpawn = whitepawn.getImage();
 		Image bpawn = blackpawn.getImage();
+		Image wrook = whiteRook.getImage();
+		Image brook = blackRook.getImage();
+		Image wknight = whiteKnight.getImage();
+		Image bknight = blackKnight.getImage();
+		Image wbishop = whiteBishop.getImage();
+		Image bbishop = blackBishop.getImage();
+		Image wqueen = whiteQueen.getImage();
+		Image bqueen = blackQueen.getImage();
+		Image wking = whiteKing.getImage();
+		Image bking = blackKing.getImage();
+		
 		JButton [][] grid = new JButton [8][8];
+		Piece [][] pieces = new Piece [8][8];//use this to access the buttons contents, use grid to access the color and background 
 		frame = new JFrame("Chess");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
@@ -78,17 +101,96 @@ public class GameManager {//singleton
 				{
 					
 					tile.setIcon(new ImageIcon(wpawn));
+					pieces[i][j] = whitepawn;
 					
 				}
 				else if(i == 6)
 				{
 					
 					tile.setIcon(new ImageIcon(bpawn));
+					pieces[i][j] = blackpawn;
+					
 				}
-						
+				
+				//code to set up other pieces
+				
+				//rooks
+				if(i == 0 && j == 0 || (i == 0 && j == 7))
+				{
+					
+					tile.setIcon(new ImageIcon(wrook));
+					pieces[i][j] = whiteRook;
+				}
+				else if ((i == 7 && j == 0) || (i == 7 && j == 7))
+				{
+					tile.setIcon(new ImageIcon(brook));
+					pieces[i][j] = blackRook;
+				
+				}
+				
+				//knights
+				if((i == 0 && j == 1) || (i == 0 && j == 6))
+				{
+					
+					tile.setIcon(new ImageIcon(wknight));
+					pieces[i][j] = whiteKnight;
+				}
+				else if((i == 7 && j == 1) || (i == 7 && j == 6))
+				{
+					
+					tile.setIcon(new ImageIcon(bknight));
+					pieces[i][j] = blackKnight;
+					
+				}
+				
+				//bishops
+				if((i == 0 && j == 2) || (i == 0 && j == 5))
+				{
+					
+					tile.setIcon(new ImageIcon(wbishop));
+					pieces[i][j] = whiteBishop;
+				}
+				else if((i == 7 && j == 2) || (i == 7 && j == 5))
+				{
+					
+					tile.setIcon(new ImageIcon(bbishop));
+					pieces[i][j] = blackBishop;
+					
+				}
+				//queens
+				if(i == 0 && j == 4)
+				{
+					
+					tile.setIcon(new ImageIcon(wqueen));
+					pieces[i][j] = whiteQueen;
+					
+				}
+				if(i == 7 && j == 3)
+				{
+					
+					tile.setIcon(new ImageIcon(bqueen));
+					pieces[i][j] = blackQueen;
+				}
+				
+				//kings 
+				if(i == 0 && j == 3)
+				{
+					
+					tile.setIcon(new ImageIcon(wking));
+					pieces[i][j] = whiteKing;
+					
+				}
+				if(i == 7 && j == 4)
+				{
+					
+					tile.setIcon(new ImageIcon(bking));
+					pieces[i][j] = blackKing;
+				}
 			}
+			
 		}
 		
+		System.out.println(pieces[1][2].getPiece());
 		frame.setLayout(new GridLayout(8, 8));
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);

@@ -9,7 +9,18 @@ public class Pawn extends Piece{
 	public Pawn(String color)
 	{
 		colors = color;
-		piece = "P";
+		piece =  color + "P";
+		
+	}
+	public String getPiece()
+	{
+		
+		return piece;
+	}
+	public boolean isDead()
+	{
+		
+		return false;
 		
 	}
 	public int[][] getMoveSet()

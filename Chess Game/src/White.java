@@ -2,8 +2,8 @@
 public class White
 {
 	
-	Piece piece = null;
 	
+	Piece piece;
 	public White(Piece piece)
 	{
 		
