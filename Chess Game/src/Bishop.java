@@ -9,7 +9,7 @@ public class Bishop extends Piece{
 	{
 		
 		colors = color;
-		piece = "Bishop";
+		piece = color + "Bishop";
 		
 	}
 	public String getPiece()

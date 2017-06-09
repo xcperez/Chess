@@ -1,0 +1,219 @@
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+
+public class GameManager{//singleton
+	
+	private static GameManager manager;
+	JButton tile = new JButton();
+	ActionListener listener = new ActionListener(){
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			
+			tile.setBackground(Color.pink);
+			
+		}
+	};
+	
+	
+	GameManager(){}
+	
+	public static GameManager getInstance() 
+	{
+		
+		if(manager == null)
+		{
+			
+			manager = new GameManager();
+			
+		}
+		return manager;
+	}
+	//add other methods 
+	void createGame() //contains all game logic 
+	{
+		JFrame frame = new JFrame();
+		Piece [][] piece = new Piece[8][8];
+		JButton [][] grid = new JButton [8][8];
+		
+		int [][] currentPos;
+		int [][] prevPos;
+		
+		piece = createBoard(frame);
+		
+		
+		
+	}
+	Piece [][] createBoard(JFrame frame)
+	{
+		Pawn whitepawn = new Pawn("White");
+		Pawn blackpawn = new Pawn("Black");
+		Rook whiteRook = new Rook("White");
+		Rook blackRook = new Rook("Black");
+		Knight whiteKnight = new Knight("White");
+		Knight blackKnight = new Knight("Black");
+		Bishop whiteBishop = new Bishop("White");
+		Bishop blackBishop = new Bishop("Black");
+		Queen whiteQueen = new Queen("White");
+		Queen blackQueen = new Queen("Black");
+		King whiteKing = new King("White");
+		King blackKing = new King ("Black");
+		
+		Image wpawn = whitepawn.getImage();
+		Image bpawn = blackpawn.getImage();
+		Image wrook = whiteRook.getImage();
+		Image brook = blackRook.getImage();
+		Image wknight = whiteKnight.getImage();
+		Image bknight = blackKnight.getImage();
+		Image wbishop = whiteBishop.getImage();
+		Image bbishop = blackBishop.getImage();
+		Image wqueen = whiteQueen.getImage();
+		Image bqueen = blackQueen.getImage();
+		Image wking = whiteKing.getImage();
+		Image bking = blackKing.getImage();
+		
+		JButton [][] grid = new JButton [8][8];
+		Piece [][] pieces = new Piece [8][8];//use this to access the buttons contents, use grid to access the color and background 
+		frame = new JFrame("Chess");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setSize(750, 750);
+		
+		
+		for(int i = 0; i < grid.length; i++) //sets tile buttons
+		{
+			
+			for(int j = 0; j < grid[i].length; j++)
+			{
+				tile = new JButton();
+				
+				frame.add(tile);
+				if((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0))
+				{
+					
+					tile.setBackground(Color.white);
+					
+					
+				}
+				else 
+				{
+					
+					tile.setBackground(Color.gray);
+					
+				}
+				if(i == 1) //sets white pawns
+				{
+					
+					tile.setIcon(new ImageIcon(wpawn));
+					pieces[i][j] = whitepawn;
+					
+				}
+				else if(i == 6)
+				{
+					
+					tile.setIcon(new ImageIcon(bpawn));
+					pieces[i][j] = blackpawn;
+					
+				}
+				
+				//code to set up other pieces
+				
+				//rooks
+				if(i == 0 && j == 0 || (i == 0 && j == 7))
+				{
+					
+					tile.setIcon(new ImageIcon(wrook));
+					pieces[i][j] = whiteRook;
+				}
+				else if ((i == 7 && j == 0) || (i == 7 && j == 7))
+				{
+					tile.setIcon(new ImageIcon(brook));
+					pieces[i][j] = blackRook;
+				
+				}
+				
+				//knights
+				if((i == 0 && j == 1) || (i == 0 && j == 6))
+				{
+					
+					tile.setIcon(new ImageIcon(wknight));
+					pieces[i][j] = whiteKnight;
+				}
+				else if((i == 7 && j == 1) || (i == 7 && j == 6))
+				{
+					
+					tile.setIcon(new ImageIcon(bknight));
+					pieces[i][j] = blackKnight;
+					
+				}
+				
+				//bishops
+				if((i == 0 && j == 2) || (i == 0 && j == 5))
+				{
+					
+					tile.setIcon(new ImageIcon(wbishop));
+					pieces[i][j] = whiteBishop;
+				}
+				else if((i == 7 && j == 2) || (i == 7 && j == 5))
+				{
+					
+					tile.setIcon(new ImageIcon(bbishop));
+					pieces[i][j] = blackBishop;
+					
+				}
+				//queens
+				if(i == 0 && j == 4)
+				{
+					
+					tile.setIcon(new ImageIcon(wqueen));
+					pieces[i][j] = whiteQueen;
+					
+				}
+				if(i == 7 && j == 3)
+				{
+					
+					tile.setIcon(new ImageIcon(bqueen));
+					pieces[i][j] = blackQueen;
+				}
+				
+				//kings 
+				if(i == 0 && j == 3)
+				{
+					
+					tile.setIcon(new ImageIcon(wking));
+					pieces[i][j] = whiteKing;
+					
+				}
+				if(i == 7 && j == 4)
+				{
+					
+					tile.setIcon(new ImageIcon(bking));
+					pieces[i][j] = blackKing;
+				}
+				grid[i][j].addActionListener(listener);
+			}
+			
+		}
+		
+	
+		frame.setLayout(new GridLayout(8, 8));
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		
+		return pieces;	
+		
+	}
+	
+}

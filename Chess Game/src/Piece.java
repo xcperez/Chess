@@ -17,6 +17,12 @@ public abstract class Piece { // decorator
 		return piece;
 		
 	}
+	public void setPiece(String x)
+	{
+		
+		piece = x;
+		
+	}
 	public int [][] getMoveSet()
 	{
 		
@@ -27,6 +33,12 @@ public abstract class Piece { // decorator
 	{
 		
 		return image;
+		
+	}
+	public void setImage(Image img)
+	{
+		
+		image = img;
 		
 	}
 	void dead()

@@ -9,7 +9,7 @@ public class Pawn extends Piece{
 	public Pawn(String color)
 	{
 		colors = color;
-		piece =  color + "P";
+		piece =  color + "Pawn";
 		
 	}
 	public String getPiece()

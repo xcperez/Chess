@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -11,9 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 
-public class GameManager {//singleton
+public class GameManager{//singleton
 	
 	private static GameManager manager;
+	JButton tile = new JButton();
+	JButton [][] grid = new JButton [8][8];
+	
 	
 	GameManager(){}
 	
@@ -29,20 +34,20 @@ public class GameManager {//singleton
 		return manager;
 	}
 	//add other methods 
-	void createGame()
+	void createGame() //contains all game logic 
 	{
 		JFrame frame = new JFrame();
-		JButton tile = new JButton();
-		int [] rows = new int[8];
-		int [] cols = new int[8];
-		int [] spaces = new int[64];
+		Piece [][] piece = new Piece[8][8];
 		
-		frame = createBoard(frame, tile);
+		int [][] currentPos;
+		int [][] prevPos;
 		
+		piece = createBoard(frame);
 		
 		
 	}
-	JFrame createBoard(JFrame frame, JButton tile)
+	
+	Piece [][] createBoard(JFrame frame)
 	{
 		Pawn whitepawn = new Pawn("White");
 		Pawn blackpawn = new Pawn("Black");
@@ -70,12 +75,28 @@ public class GameManager {//singleton
 		Image wking = whiteKing.getImage();
 		Image bking = blackKing.getImage();
 		
-		JButton [][] grid = new JButton [8][8];
+	
+		
+		JButton tile = new JButton();
 		Piece [][] pieces = new Piece [8][8];//use this to access the buttons contents, use grid to access the color and background 
 		frame = new JFrame("Chess");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setSize(750, 750);
+		
+		ActionListener chooseListener = new ActionListener(){
+			
+			public void actionPerformed(ActionEvent e)
+			{
+				JButton btn = (JButton)e.getSource();
+				
+					
+				choose(pieces , grid, Integer.parseInt(btn.getClientProperty("Row").toString()), Integer.parseInt(btn.getClientProperty("Column").toString()));
+					
+					
+			}
+		};
+		
 		
 		
 		for(int i = 0; i < grid.length; i++) //sets tile buttons
@@ -83,7 +104,13 @@ public class GameManager {//singleton
 			
 			for(int j = 0; j < grid[i].length; j++)
 			{
+			
 				tile = new JButton();
+				grid[i][j] = tile;
+				grid[i][j].putClientProperty("Row", i);
+				grid[i][j].putClientProperty("Column", j);
+				grid[i][j].addActionListener(chooseListener);
+				
 				frame.add(tile);
 				if((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0))
 				{
@@ -186,19 +213,80 @@ public class GameManager {//singleton
 					tile.setIcon(new ImageIcon(bking));
 					pieces[i][j] = blackKing;
 				}
+			
+				
 			}
+			
+			
+			
 			
 		}
 		
-		System.out.println(pieces[1][2].getPiece());
+	
 		frame.setLayout(new GridLayout(8, 8));
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
-		return frame;	
+		
+		return pieces;	
 		
 	}
-
 	
+	public void choose(Piece [][] piece, JButton [][] grid , int x, int y) //choose which piece the player wants to pick, gets info of piece such as available moves
+	{
+		ActionListener moveListener = new ActionListener(){
+			
+			public void actionPerformed(ActionEvent e)
+			{
+				
+				JButton btn = (JButton)e.getSource();
+				
+				move(piece , grid , Integer.parseInt(btn.getClientProperty("Row").toString()), Integer.parseInt(btn.getClientProperty("Column").toString()));
 
+			}
+		};
+		try
+		{
+			
+			System.out.println(piece[x][y].getPiece());
+			for(int i = 0; i < grid.length; i++)
+			{
+				
+				for(int j = 0; j < grid[i].length; j++)
+				{
+					
+					grid[i][j].addActionListener(moveListener);
+					
+				}
+			}
+			
+			
+		}
+		catch(Exception ex)
+		{
+			
+			System.out.println("No piece here");
+		}
+		
+	}
+	
+	public void move(Piece [][] piece, JButton[][] grid, int x, int y )
+	{
+		
+		try 
+		{
+			
+			grid[x][y].setIcon(null);
+			piece[x][y].setPiece(null); //after this function, need to reset all buttons back to chooselisteners. 
+		
+			
+		}
+		catch(Exception ex)
+		{
+			
+			System.out.println("Error");
+			
+		}
+	}
+	
 }

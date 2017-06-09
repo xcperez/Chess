@@ -10,7 +10,7 @@ public class Queen extends Piece{
 	{
 		
 		colors = color;
-		piece = "Queen";
+		piece = color + "Queen";
 		
 	}
 	public String getPiece()

@@ -9,7 +9,7 @@ public class Rook extends Piece{
 	{
 		
 		colors = color;
-		piece = "R";
+		piece = color + "Rook";
 		
 	}
 	public String getPiece()

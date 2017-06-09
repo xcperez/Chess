@@ -9,7 +9,7 @@ public class Knight extends Piece{
 	{
 		
 		colors = color;
-		piece = "Knight";
+		piece = color + "Knight";
 		
 	}
 	public String getPiece()
