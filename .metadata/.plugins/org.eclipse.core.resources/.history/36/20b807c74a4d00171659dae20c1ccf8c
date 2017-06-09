@@ -16,36 +16,10 @@ import javax.swing.JFrame;
 public class GameManager{//singleton
 	
 	private static GameManager manager;
-	int turn = 0;
 	JButton tile = new JButton();
 	JButton [][] grid = new JButton [8][8];
-	Piece [][] piece = new Piece[8][8];
-	int xPos;
-	int yPos;
 	
-	ActionListener chooseListener = new ActionListener(){
-		
-		public void actionPerformed(ActionEvent e)
-		{
-			JButton btn = (JButton)e.getSource();
-			
-				
-			choose(piece, grid, Integer.parseInt(btn.getClientProperty("Row").toString()), Integer.parseInt(btn.getClientProperty("Column").toString()));
-				
-				
-		}
-	};
-	ActionListener moveListener = new ActionListener(){
-		
-		public void actionPerformed(ActionEvent e)
-		{
-			
-			JButton btn = (JButton)e.getSource();
-			
-			move(piece , grid , xPos, yPos, Integer.parseInt(btn.getClientProperty("Row").toString()), Integer.parseInt(btn.getClientProperty("Column").toString()));
-
-		}
-	};
+	
 	GameManager(){}
 	
 	public static GameManager getInstance() 
@@ -63,11 +37,13 @@ public class GameManager{//singleton
 	void createGame() //contains all game logic 
 	{
 		JFrame frame = new JFrame();
+		Piece [][] piece = new Piece[8][8];
 		
 		int [][] currentPos;
 		int [][] prevPos;
 		
 		piece = createBoard(frame);
+		
 		
 	}
 	
@@ -102,12 +78,24 @@ public class GameManager{//singleton
 	
 		
 		JButton tile = new JButton();
+		Piece [][] pieces = new Piece [8][8];//use this to access the buttons contents, use grid to access the color and background 
 		frame = new JFrame("Chess");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setSize(750, 750);
 		
-		
+		ActionListener chooseListener = new ActionListener(){
+			
+			public void actionPerformed(ActionEvent e)
+			{
+				JButton btn = (JButton)e.getSource();
+				
+					
+				choose(pieces , grid, Integer.parseInt(btn.getClientProperty("Row").toString()), Integer.parseInt(btn.getClientProperty("Column").toString()));
+					
+					
+			}
+		};
 		
 		
 		
@@ -140,14 +128,14 @@ public class GameManager{//singleton
 				{
 					
 					tile.setIcon(new ImageIcon(wpawn));
-					piece[i][j] = new Pawn("White");
+					pieces[i][j] = whitepawn;
 					
 				}
 				else if(i == 6)
 				{
 					
 					tile.setIcon(new ImageIcon(bpawn));
-					piece[i][j] = new Pawn("Black");
+					pieces[i][j] = blackpawn;
 					
 				}
 				
@@ -158,12 +146,12 @@ public class GameManager{//singleton
 				{
 					
 					tile.setIcon(new ImageIcon(wrook));
-					piece[i][j] = whiteRook;
+					pieces[i][j] = whiteRook;
 				}
 				else if ((i == 7 && j == 0) || (i == 7 && j == 7))
 				{
 					tile.setIcon(new ImageIcon(brook));
-					piece[i][j] = blackRook;
+					pieces[i][j] = blackRook;
 				
 				}
 				
@@ -172,13 +160,13 @@ public class GameManager{//singleton
 				{
 					
 					tile.setIcon(new ImageIcon(wknight));
-					piece[i][j] = whiteKnight;
+					pieces[i][j] = whiteKnight;
 				}
 				else if((i == 7 && j == 1) || (i == 7 && j == 6))
 				{
 					
 					tile.setIcon(new ImageIcon(bknight));
-					piece[i][j] = blackKnight;
+					pieces[i][j] = blackKnight;
 					
 				}
 				
@@ -187,13 +175,13 @@ public class GameManager{//singleton
 				{
 					
 					tile.setIcon(new ImageIcon(wbishop));
-					piece[i][j] = whiteBishop;
+					pieces[i][j] = whiteBishop;
 				}
 				else if((i == 7 && j == 2) || (i == 7 && j == 5))
 				{
 					
 					tile.setIcon(new ImageIcon(bbishop));
-					piece[i][j] = blackBishop;
+					pieces[i][j] = blackBishop;
 					
 				}
 				//queens
@@ -201,14 +189,14 @@ public class GameManager{//singleton
 				{
 					
 					tile.setIcon(new ImageIcon(wqueen));
-					piece[i][j] = whiteQueen;
+					pieces[i][j] = whiteQueen;
 					
 				}
 				if(i == 7 && j == 3)
 				{
 					
 					tile.setIcon(new ImageIcon(bqueen));
-					piece[i][j] = blackQueen;
+					pieces[i][j] = blackQueen;
 				}
 				
 				//kings 
@@ -216,14 +204,14 @@ public class GameManager{//singleton
 				{
 					
 					tile.setIcon(new ImageIcon(wking));
-					piece[i][j] = whiteKing;
+					pieces[i][j] = whiteKing;
 					
 				}
 				if(i == 7 && j == 4)
 				{
 					
 					tile.setIcon(new ImageIcon(bking));
-					piece[i][j] = blackKing;
+					pieces[i][j] = blackKing;
 				}
 			
 				
@@ -240,26 +228,33 @@ public class GameManager{//singleton
 		frame.setVisible(true);
 		
 		
-		return piece;	
+		return pieces;	
 		
 	}
 	
 	public void choose(Piece [][] piece, JButton [][] grid , int x, int y) //choose which piece the player wants to pick, gets info of piece such as available moves
 	{
-		
+		ActionListener moveListener = new ActionListener(){
+			
+			public void actionPerformed(ActionEvent e)
+			{
+				
+				JButton btn = (JButton)e.getSource();
+				
+				move(piece , grid , Integer.parseInt(btn.getClientProperty("Row").toString()), Integer.parseInt(btn.getClientProperty("Column").toString()));
+
+			}
+		};
 		try
 		{
 			
 			System.out.println(piece[x][y].getPiece());
-			xPos = x;
-			yPos = y;
 			for(int i = 0; i < grid.length; i++)
 			{
 				
 				for(int j = 0; j < grid[i].length; j++)
 				{
 					
-					grid[i][j].removeActionListener(chooseListener);
 					grid[i][j].addActionListener(moveListener);
 					
 				}
@@ -275,26 +270,15 @@ public class GameManager{//singleton
 		
 	}
 	
-	public void move(Piece [][] piece, JButton[][] grid,int xp, int yp, int x, int y)
+	public void move(Piece [][] piece, JButton[][] grid, int x, int y )
 	{
 		
 		try 
 		{
-			grid[x][y].setIcon(grid[xp][yp].getIcon());
-			grid[xp][yp].setIcon(null);
 			
-			for(int i = 0; i < grid.length; i++)
-			{
-				
-				for(int j = 0; j < grid[i].length; j++)
-				{
-					
-					grid[i][j].removeActionListener(moveListener);
-					grid[i][j].addActionListener(chooseListener);
-					turn++;
-					
-				}
-			}
+			grid[x][y].setIcon(null);
+			piece[x][y].setPiece(null); //after this function, need to reset all buttons back to chooselisteners. 
+		
 			
 		}
 		catch(Exception ex)
