@@ -1,12 +1,11 @@
 import java.awt.Image;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 
 
 public class Pawn extends Piece{
 	
-	
+	boolean hasMoved = false;
 	int xMove = 1;
 	int yMove = 0;
 	
@@ -33,8 +32,7 @@ public class Pawn extends Piece{
 		if(hasMoved == false)
 		{
 			
-			xMove = 2;
-			hasMoved = true;
+			xMove++;
 			
 		}
 		return xMove;
@@ -51,8 +49,7 @@ public class Pawn extends Piece{
 		
 		return colors;
 		
-	}	
-	
+	}
 	public Image getImage()
 	{
 	

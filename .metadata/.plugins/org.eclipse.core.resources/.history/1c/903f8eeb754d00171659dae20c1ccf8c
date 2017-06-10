@@ -33,8 +33,7 @@ public class Pawn extends Piece{
 		if(hasMoved == false)
 		{
 			
-			xMove = 2;
-			hasMoved = true;
+			xMove++;
 			
 		}
 		return xMove;

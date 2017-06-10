@@ -279,10 +279,9 @@ public class GameManager{//singleton
 	public void move(Piece [][] piece, JButton[][] grid,int xp, int yp, int x, int y) //xp and yp are the initial positions of the pieces
 	{
 		System.out.println(xp);
+		
 		System.out.println(x);
 		System.out.println(piece[xp][yp].getXMove());
-		System.out.println(yp);
-		System.out.println(y);
 		try 
 		{
 			
@@ -290,7 +289,7 @@ public class GameManager{//singleton
 			{
 			
 			case "WhitePawn":
-				if((x != (xp + piece[xp][yp].getXMove())) || (y != (yp + piece[xp][yp].getYMove())))
+				if((x != (xp + piece[xp][yp].getXMove())) && (y != (yp + piece[xp][yp].getYMove())))
 				{
 					
 					System.out.println("Not a valid move.");

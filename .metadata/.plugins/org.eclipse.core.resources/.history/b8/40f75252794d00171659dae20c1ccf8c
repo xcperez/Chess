@@ -290,7 +290,7 @@ public class GameManager{//singleton
 			{
 			
 			case "WhitePawn":
-				if((x != (xp + piece[xp][yp].getXMove())) || (y != (yp + piece[xp][yp].getYMove())))
+				if((x != (xp + piece[xp][yp].getXMove())) && (y != (yp + piece[xp][yp].getYMove())))
 				{
 					
 					System.out.println("Not a valid move.");

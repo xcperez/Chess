@@ -22,7 +22,6 @@ public class GameManager{//singleton
 	Piece [][] piece = new Piece[8][8];
 	int xPos;
 	int yPos;
-	boolean hasMoved = false;
 	
 	ActionListener chooseListener = new ActionListener(){
 		
@@ -276,53 +275,13 @@ public class GameManager{//singleton
 		
 	}
 	
-	public void move(Piece [][] piece, JButton[][] grid,int xp, int yp, int x, int y) //xp and yp are the initial positions of the pieces
+	public void move(Piece [][] piece, JButton[][] grid,int xp, int yp, int x, int y)
 	{
-		System.out.println(xp);
-		System.out.println(x);
-		System.out.println(piece[xp][yp].getXMove());
-		System.out.println(yp);
-		System.out.println(y);
+		
 		try 
 		{
-			
-			switch(piece[xp][yp].getPiece())
-			{
-			
-			case "WhitePawn":
-				if((x != (xp + piece[xp][yp].getXMove())) || (y != (yp + piece[xp][yp].getYMove())))
-				{
-					
-					System.out.println("Not a valid move.");
-					
-				}
-				else 
-				{
-					piece[x][y] = new Pawn("White");
-					piece[x][y].hasMoved = true;
-					piece[xp][yp].setPiece(null);
-					grid[x][y].setIcon(grid[xp][yp].getIcon());
-					grid[xp][yp].setIcon(null);
-				}
-				break;
-			case "BlackPawn":
-				if((x != (xp + piece[xp][yp].getXMove())) && (y != (yp + piece[xp][yp].getYMove())))
-				{
-					
-					System.out.println("Not a valid move.");
-					
-				}
-				else 
-				{
-					piece[x][y] = new Pawn("Black");
-					piece[xp][yp].setPiece(null);
-					grid[x][y].setIcon(grid[xp][yp].getIcon());
-					grid[xp][yp].setIcon(null);
-				}
-				break;
-				
-			}
-			
+			grid[x][y].setIcon(grid[xp][yp].getIcon());
+			grid[xp][yp].setIcon(null);
 			
 			for(int i = 0; i < grid.length; i++)
 			{

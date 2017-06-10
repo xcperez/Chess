@@ -9,7 +9,6 @@ public abstract class Piece { // decorator
 	int xMove = 0;
 	int yMove = 0;
 	int [][] moveSet = new int [xMove][yMove];
-	boolean hasMoved = false;
 	boolean isDead = false;
 	
 	public String getPiece()
@@ -24,15 +23,11 @@ public abstract class Piece { // decorator
 		piece = x;
 		
 	}
-	public int getXMove()
+	public int [][] getMoveSet()
 	{
 		
-		return xMove;
-	}
-	public int getYMove()
-	{
+		return moveSet;
 		
-		return yMove;
 	}
 	public Image getImage()
 	{
