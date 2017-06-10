@@ -192,48 +192,6 @@ public abstract class Piece { // decorator
 				
 				System.out.println("Not a valid move.");
 			}
-		case "BlackRook":
-			
-			if(x > xp && y == yp)
-			{
-				
-				piece[x][y] = new Rook("Black");
-				piece[xp][yp].setPiece(null);
-				grid[x][y].setIcon(grid[xp][yp].getIcon());
-				grid[xp][yp].setIcon(null);
-				
-			}
-			else if (y > yp && x == xp)
-			{
-	
-				piece[x][y] = new Rook("Black");
-				piece[xp][yp].setPiece(null);
-				grid[x][y].setIcon(grid[xp][yp].getIcon());
-				grid[xp][yp].setIcon(null);
-			}
-			else if(y < yp && x == xp)
-			{
-				
-				piece[x][y] = new Rook("Black");
-				piece[xp][yp].setPiece(null);
-				grid[x][y].setIcon(grid[xp][yp].getIcon());
-				grid[xp][yp].setIcon(null);
-			}
-			else if(x < xp && y == yp)
-			{
-				
-				piece[x][y] = new Rook("Black");
-				piece[xp][yp].setPiece(null);
-				grid[x][y].setIcon(grid[xp][yp].getIcon());
-				grid[xp][yp].setIcon(null);
-			}
-			else 
-			{
-				
-				System.out.println("Not a valid move.");
-			}
-			
-			
 		}
 		
 	}

@@ -197,7 +197,7 @@ public abstract class Piece { // decorator
 			if(x > xp && y == yp)
 			{
 				
-				piece[x][y] = new Rook("Black");
+				piece[x][y] = new Rook("White");
 				piece[xp][yp].setPiece(null);
 				grid[x][y].setIcon(grid[xp][yp].getIcon());
 				grid[xp][yp].setIcon(null);
@@ -206,7 +206,7 @@ public abstract class Piece { // decorator
 			else if (y > yp && x == xp)
 			{
 	
-				piece[x][y] = new Rook("Black");
+				piece[x][y] = new Rook("White");
 				piece[xp][yp].setPiece(null);
 				grid[x][y].setIcon(grid[xp][yp].getIcon());
 				grid[xp][yp].setIcon(null);
@@ -214,7 +214,7 @@ public abstract class Piece { // decorator
 			else if(y < yp && x == xp)
 			{
 				
-				piece[x][y] = new Rook("Black");
+				piece[x][y] = new Rook("White");
 				piece[xp][yp].setPiece(null);
 				grid[x][y].setIcon(grid[xp][yp].getIcon());
 				grid[xp][yp].setIcon(null);
@@ -222,7 +222,7 @@ public abstract class Piece { // decorator
 			else if(x < xp && y == yp)
 			{
 				
-				piece[x][y] = new Rook("Black");
+				piece[x][y] = new Rook("White");
 				piece[xp][yp].setPiece(null);
 				grid[x][y].setIcon(grid[xp][yp].getIcon());
 				grid[xp][yp].setIcon(null);
@@ -232,8 +232,6 @@ public abstract class Piece { // decorator
 				
 				System.out.println("Not a valid move.");
 			}
-			
-			
 		}
 		
 	}
