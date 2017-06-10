@@ -171,22 +171,6 @@ public abstract class Piece { // decorator
 				grid[x][y].setIcon(grid[xp][yp].getIcon());
 				grid[xp][yp].setIcon(null);
 			}
-			else if(y < yp && x == xp)
-			{
-				
-				piece[x][y] = new Rook("White");
-				piece[xp][yp].setPiece(null);
-				grid[x][y].setIcon(grid[xp][yp].getIcon());
-				grid[xp][yp].setIcon(null);
-			}
-			else if(x < xp && y == yp)
-			{
-				
-				piece[x][y] = new Rook("White");
-				piece[xp][yp].setPiece(null);
-				grid[x][y].setIcon(grid[xp][yp].getIcon());
-				grid[xp][yp].setIcon(null);
-			}
 			else 
 			{
 				

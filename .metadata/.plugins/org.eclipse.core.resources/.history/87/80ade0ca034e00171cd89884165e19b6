@@ -5,8 +5,6 @@ import javax.imageio.ImageIO;
 
 public class Rook extends Piece{
 	
-	int xMove = 1;
-	int yMove = 1;
 	public Rook(String color)
 	{
 		
@@ -24,17 +22,6 @@ public class Rook extends Piece{
 		
 		return false;
 		
-	}
-	public int getXMove()
-	{
-		
-		return xMove;
-		
-	}
-	public int getYMove()
-	{
-		
-		return yMove;
 	}
 	public int[][] getMoveSet()
 	{
