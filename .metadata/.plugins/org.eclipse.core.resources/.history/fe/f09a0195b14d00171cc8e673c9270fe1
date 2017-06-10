@@ -1,0 +1,375 @@
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+
+public class GameManager{//singleton
+	
+	private static GameManager manager;
+	int turn = 0;
+	JButton tile = new JButton();
+	JButton [][] grid = new JButton [8][8];
+	Piece [][] piece = new Piece[8][8];
+	int xPos;
+	int yPos;
+	boolean hasMoved = false;
+	
+	ActionListener chooseListener = new ActionListener(){
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			JButton btn = (JButton)e.getSource();
+			
+				
+			choose(piece, grid, Integer.parseInt(btn.getClientProperty("Row").toString()), Integer.parseInt(btn.getClientProperty("Column").toString()));
+				
+				
+		}
+	};
+	ActionListener moveListener = new ActionListener(){
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			
+			JButton btn = (JButton)e.getSource();
+			
+			move(piece , grid , xPos, yPos, Integer.parseInt(btn.getClientProperty("Row").toString()), Integer.parseInt(btn.getClientProperty("Column").toString()));
+
+		}
+	};
+	GameManager(){}
+	
+	public static GameManager getInstance() 
+	{
+		
+		if(manager == null)
+		{
+			
+			manager = new GameManager();
+			
+		}
+		return manager;
+	}
+	//add other methods 
+	void createGame() //contains all game logic 
+	{
+		JFrame frame = new JFrame();
+		
+		int [][] currentPos;
+		int [][] prevPos;
+		
+		piece = createBoard(frame);
+		
+	}
+	
+	Piece [][] createBoard(JFrame frame)
+	{
+		Pawn whitepawn = new Pawn("White");
+		Pawn blackpawn = new Pawn("Black");
+		Rook whiteRook = new Rook("White");
+		Rook blackRook = new Rook("Black");
+		Knight whiteKnight = new Knight("White");
+		Knight blackKnight = new Knight("Black");
+		Bishop whiteBishop = new Bishop("White");
+		Bishop blackBishop = new Bishop("Black");
+		Queen whiteQueen = new Queen("White");
+		Queen blackQueen = new Queen("Black");
+		King whiteKing = new King("White");
+		King blackKing = new King ("Black");
+		
+		Image wpawn = whitepawn.getImage();
+		Image bpawn = blackpawn.getImage();
+		Image wrook = whiteRook.getImage();
+		Image brook = blackRook.getImage();
+		Image wknight = whiteKnight.getImage();
+		Image bknight = blackKnight.getImage();
+		Image wbishop = whiteBishop.getImage();
+		Image bbishop = blackBishop.getImage();
+		Image wqueen = whiteQueen.getImage();
+		Image bqueen = blackQueen.getImage();
+		Image wking = whiteKing.getImage();
+		Image bking = blackKing.getImage();
+		
+	
+		
+		JButton tile = new JButton();
+		frame = new JFrame("Chess");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setSize(750, 750);
+		
+		
+		
+		
+		
+		for(int i = 0; i < grid.length; i++) //sets tile buttons
+		{
+			
+			for(int j = 0; j < grid[i].length; j++)
+			{
+			
+				tile = new JButton();
+				grid[i][j] = tile;
+				grid[i][j].putClientProperty("Row", i);
+				grid[i][j].putClientProperty("Column", j);
+				grid[i][j].addActionListener(chooseListener);
+				
+				frame.add(tile);
+				if((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0))
+				{
+					
+					tile.setBackground(Color.white);
+					
+				}
+				else 
+				{
+					
+					tile.setBackground(Color.gray);
+					
+				}
+				if(i == 1) //sets white pawns
+				{
+					
+					tile.setIcon(new ImageIcon(wpawn));
+					piece[i][j] = new Pawn("White");
+					
+				}
+				else if(i == 6)
+				{
+					
+					tile.setIcon(new ImageIcon(bpawn));
+					piece[i][j] = new Pawn("Black");
+					
+				}
+				
+				//code to set up other pieces
+				
+				//rooks
+				if(i == 0 && j == 0 || (i == 0 && j == 7))
+				{
+					
+					tile.setIcon(new ImageIcon(wrook));
+					piece[i][j] = whiteRook;
+				}
+				else if ((i == 7 && j == 0) || (i == 7 && j == 7))
+				{
+					tile.setIcon(new ImageIcon(brook));
+					piece[i][j] = blackRook;
+				
+				}
+				
+				//knights
+				if((i == 0 && j == 1) || (i == 0 && j == 6))
+				{
+					
+					tile.setIcon(new ImageIcon(wknight));
+					piece[i][j] = whiteKnight;
+				}
+				else if((i == 7 && j == 1) || (i == 7 && j == 6))
+				{
+					
+					tile.setIcon(new ImageIcon(bknight));
+					piece[i][j] = blackKnight;
+					
+				}
+				
+				//bishops
+				if((i == 0 && j == 2) || (i == 0 && j == 5))
+				{
+					
+					tile.setIcon(new ImageIcon(wbishop));
+					piece[i][j] = whiteBishop;
+				}
+				else if((i == 7 && j == 2) || (i == 7 && j == 5))
+				{
+					
+					tile.setIcon(new ImageIcon(bbishop));
+					piece[i][j] = blackBishop;
+					
+				}
+				//queens
+				if(i == 0 && j == 4)
+				{
+					
+					tile.setIcon(new ImageIcon(wqueen));
+					piece[i][j] = whiteQueen;
+					
+				}
+				if(i == 7 && j == 3)
+				{
+					
+					tile.setIcon(new ImageIcon(bqueen));
+					piece[i][j] = blackQueen;
+				}
+				
+				//kings 
+				if(i == 0 && j == 3)
+				{
+					
+					tile.setIcon(new ImageIcon(wking));
+					piece[i][j] = whiteKing;
+					
+				}
+				if(i == 7 && j == 4)
+				{
+					
+					tile.setIcon(new ImageIcon(bking));
+					piece[i][j] = blackKing;
+				}
+			
+				
+			}
+			
+			
+			
+			
+		}
+		
+	
+		frame.setLayout(new GridLayout(8, 8));
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		
+		
+		return piece;	
+		
+	}
+	
+	public void choose(Piece [][] piece, JButton [][] grid , int x, int y) //choose which piece the player wants to pick, gets info of piece such as available moves
+	{
+		
+		try
+		{
+			
+			System.out.println(piece[x][y].getPiece());
+			xPos = x;
+			yPos = y;
+			for(int i = 0; i < grid.length; i++)
+			{
+				
+				for(int j = 0; j < grid[i].length; j++)
+				{
+					
+					grid[i][j].removeActionListener(chooseListener);
+					grid[i][j].addActionListener(moveListener);
+					
+				}
+			}
+			
+			
+		}
+		catch(Exception ex)
+		{
+			
+			System.out.println("No piece here");
+		}
+		
+	}
+	
+	public void move(Piece [][] piece, JButton[][] grid,int xp, int yp, int x, int y) //xp and yp are the initial positions of the pieces
+	{
+		System.out.println(xp);
+		System.out.println(x);
+		System.out.println(piece[xp][yp].getXMove());
+		System.out.println(yp);
+		System.out.println(y);
+		try 
+		{
+			
+			switch(piece[xp][yp].getPiece())
+			{
+			
+			case "WhitePawn":
+				if((x != (xp + piece[xp][yp].getXMove())) || (y != (yp + piece[xp][yp].getYMove())))
+				{
+					
+					System.out.println("Not a valid move.");
+					
+				}
+				else 
+				{
+					piece[x][y] = new Pawn("White");
+					
+					piece[x][y].hasMoved = true;
+					piece[xp][yp].setPiece(null);
+					grid[x][y].setIcon(grid[xp][yp].getIcon());
+					grid[xp][yp].setIcon(null);
+				}
+				break;
+			case "BlackPawn":
+				if(hasMoved == false)
+				{
+					
+					if(((x != (xp + piece[xp][yp].getXMove())) && (y != (yp + piece[xp][yp].getYMove()))) || 
+							(x != (xp + piece[xp][yp].getXMove() + 1)) && (y != (yp + piece[xp][yp].getYMove())))
+					{
+						
+						System.out.println("Invalid Move");
+						
+					}
+					else 
+					{
+						
+						piece[x][y] = new Pawn("Black");
+						piece[xp][yp].setPiece(null);
+						grid[x][y].setIcon(grid[xp][yp].getIcon());
+						grid[xp][yp].setIcon(null);
+						piece[x][y].hasMoved = true;
+					}
+				
+				}
+				else 
+				{
+					
+					if((x != (xp + piece[xp][yp].getXMove())) && (y != (yp + piece[xp][yp].getYMove())))
+					{
+						piece[x][y] = new Pawn("Black");
+						piece[xp][yp].setPiece(null);
+						grid[x][y].setIcon(grid[xp][yp].getIcon());
+						grid[xp][yp].setIcon(null);
+						
+					}
+					else 
+					{
+						
+						System.out.println("Invalid Move");
+					}
+				}
+				break;
+				
+			}
+			
+			
+			for(int i = 0; i < grid.length; i++)
+			{
+				
+				for(int j = 0; j < grid[i].length; j++)
+				{
+					
+					grid[i][j].removeActionListener(moveListener);
+					grid[i][j].addActionListener(chooseListener);
+					turn++;
+					
+				}
+			}
+			
+		}
+		catch(Exception ex)
+		{
+			
+			System.out.println("Error");
+			
+		}
+	}
+	
+}

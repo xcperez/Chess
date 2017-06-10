@@ -65,9 +65,6 @@ public class GameManager{//singleton
 	{
 		JFrame frame = new JFrame();
 		
-		int [][] currentPos;
-		int [][] prevPos;
-		
 		piece = createBoard(frame);
 		
 	}
@@ -286,42 +283,8 @@ public class GameManager{//singleton
 		try 
 		{
 			
-			switch(piece[xp][yp].getPiece())
-			{
 			
-			case "WhitePawn":
-				if((x != (xp + piece[xp][yp].getXMove())) || (y != (yp + piece[xp][yp].getYMove())))
-				{
-					
-					System.out.println("Not a valid move.");
-					
-				}
-				else 
-				{
-					piece[x][y] = new Pawn("White");
-					piece[x][y].hasMoved = true;
-					piece[xp][yp].setPiece(null);
-					grid[x][y].setIcon(grid[xp][yp].getIcon());
-					grid[xp][yp].setIcon(null);
-				}
-				break;
-			case "BlackPawn":
-				if((x != (xp + piece[xp][yp].getXMove())) && (y != (yp + piece[xp][yp].getYMove())))
-				{
-					
-					System.out.println("Not a valid move.");
-					
-				}
-				else 
-				{
-					piece[x][y] = new Pawn("Black");
-					piece[xp][yp].setPiece(null);
-					grid[x][y].setIcon(grid[xp][yp].getIcon());
-					grid[xp][yp].setIcon(null);
-				}
-				break;
-				
-			}
+			piece[xp][yp].movePiece(piece, grid, xp, yp, x, y);
 			
 			
 			for(int i = 0; i < grid.length; i++)

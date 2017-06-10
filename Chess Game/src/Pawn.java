@@ -29,14 +29,7 @@ public class Pawn extends Piece{
 	}
 	public int getXMove()
 	{
-		
-		if(hasMoved == false)
-		{
 			
-			xMove = 2;
-			hasMoved = true;
-			
-		}
 		return xMove;
 		
 	}
