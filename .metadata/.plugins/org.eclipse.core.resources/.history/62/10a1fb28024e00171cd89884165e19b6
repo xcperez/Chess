@@ -29,12 +29,7 @@ public class Pawn extends Piece{
 	}
 	public int getXMove()
 	{
-		if(colors == "Black")
-		{
 			
-			xMove = -1;
-			
-		}
 		return xMove;
 		
 	}

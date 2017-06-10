@@ -105,52 +105,6 @@ public abstract class Piece { // decorator
 				}
 			}
 			break;
-			
-		case "BlackPawn":
-			
-			if(piece[xp][yp].hasMoved == false)
-			{
-				if((x == (xp + piece[xp][yp].getXMove())) && (y == (yp + piece[xp][yp].getYMove())))
-				{
-					
-					piece[x][y] = new Pawn("White");
-					piece[x][y].hasMoved = true;
-					piece[xp][yp].setPiece(null);
-					grid[x][y].setIcon(grid[xp][yp].getIcon());
-					grid[xp][yp].setIcon(null);
-				}
-				else if((x == (xp + piece[xp][yp].getXMove() - 1)) && (y == (yp + piece[xp][yp].getYMove())))
-				{
-					
-					piece[x][y] = new Pawn("White");
-					piece[x][y].hasMoved = true;
-					piece[xp][yp].setPiece(null);
-					grid[x][y].setIcon(grid[xp][yp].getIcon());
-					grid[xp][yp].setIcon(null);
-					
-				}
-				else 
-				{
-					System.out.println("Not a valid move");
-				}
-			}
-			else 
-			{
-				
-				if((x == (xp + piece[xp][yp].getXMove())) && (y == (yp + piece[xp][yp].getYMove())))
-				{
-					
-					piece[x][y] = new Pawn("White");
-					piece[x][y].hasMoved = true;
-					piece[xp][yp].setPiece(null);
-					grid[x][y].setIcon(grid[xp][yp].getIcon());
-					grid[xp][yp].setIcon(null);
-				}
-				else 
-				{
-					System.out.println("Not a valid move.");
-				}
-			}
 		}
 		
 	}
