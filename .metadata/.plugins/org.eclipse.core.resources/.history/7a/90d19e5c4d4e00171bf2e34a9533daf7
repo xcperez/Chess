@@ -227,18 +227,11 @@ public class GameManager{//singleton
 					piece[i][j] = whiteBishop2;
 					
 				}
-				if(i == 7 && j == 2)
+				if((i == 7 && j == 2) || (i == 7 && j == 5))
 				{
 					
 					tile.setIcon(new ImageIcon(bbishop));
 					piece[i][j] = blackBishop;
-					
-				}
-				if(i == 7 && j == 5)
-				{
-					
-					tile.setIcon(new ImageIcon(bbishop));
-					piece[i][j] = blackBishop2;
 					
 				}
 				//queens

@@ -266,7 +266,7 @@ public abstract class Piece { // decorator
 				grid[x][y].setIcon(grid[xp][yp].getIcon());
 				grid[xp][yp].setIcon(null);
 				
-			} else if((xp - x) == (yp - y)) //did this wrong, fix after we eat 
+			} else if((xp + x) == (yp - y))
 			{
 				piece[x][y] = new Bishop("Black");
 				piece[xp][yp].setPiece(null);
