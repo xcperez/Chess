@@ -113,16 +113,16 @@ public abstract class Piece { // decorator
 				if((x == (xp + piece[xp][yp].getXMove())) && (y == (yp + piece[xp][yp].getYMove())))
 				{
 					
-					piece[x][y] = new Pawn("Black");
+					piece[x][y] = new Pawn("White");
 					piece[x][y].hasMoved = true;
 					piece[xp][yp].setPiece(null);
 					grid[x][y].setIcon(grid[xp][yp].getIcon());
 					grid[xp][yp].setIcon(null);
 				}
-				else if((x == ((xp + piece[xp][yp].getXMove()) - 1)) && (y == (yp + piece[xp][yp].getYMove())))
+				else if((x == (xp + piece[xp][yp].getXMove() - 1)) && (y == (yp + piece[xp][yp].getYMove())))
 				{
 					
-					piece[x][y] = new Pawn("Black");
+					piece[x][y] = new Pawn("White");
 					piece[x][y].hasMoved = true;
 					piece[xp][yp].setPiece(null);
 					grid[x][y].setIcon(grid[xp][yp].getIcon());
@@ -140,7 +140,7 @@ public abstract class Piece { // decorator
 				if((x == (xp + piece[xp][yp].getXMove())) && (y == (yp + piece[xp][yp].getYMove())))
 				{
 					
-					piece[x][y] = new Pawn("Black");
+					piece[x][y] = new Pawn("White");
 					piece[x][y].hasMoved = true;
 					piece[xp][yp].setPiece(null);
 					grid[x][y].setIcon(grid[xp][yp].getIcon());
@@ -151,7 +151,7 @@ public abstract class Piece { // decorator
 					System.out.println("Not a valid move.");
 				}
 			}
-			break;
+			
 		case "WhiteRook":
 			
 			if(x > xp && y == yp)
@@ -192,7 +192,6 @@ public abstract class Piece { // decorator
 				
 				System.out.println("Not a valid move.");
 			}
-			break;
 		case "BlackRook":
 			
 			if(x > xp && y == yp)
@@ -233,29 +232,8 @@ public abstract class Piece { // decorator
 				
 				System.out.println("Not a valid move.");
 			}
-			break;
 			
-		case "WhiteBishop":
 			
-			if(((x - xp) == ( y - yp)))//forward +, sideways +
-			{
-				
-				piece[x][y] = new Bishop("White");
-				piece[xp][yp].setPiece(null);
-				grid[x][y].setIcon(grid[xp][yp].getIcon());
-				grid[xp][yp].setIcon(null);
-				
-			}else if((x - xp) == (-1 * (y - yp)))
-			{
-				piece[x][y] = new Bishop("White");
-				piece[xp][yp].setPiece(null);
-				grid[x][y].setIcon(grid[xp][yp].getIcon());
-				grid[xp][yp].setIcon(null);
-				
-				
-			}
-			
-			break; 
 		}
 		
 	}

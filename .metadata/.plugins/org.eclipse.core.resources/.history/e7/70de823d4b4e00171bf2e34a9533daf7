@@ -213,18 +213,11 @@ public class GameManager{//singleton
 				}
 				
 				//bishops
-				if(i == 0 && j == 2)
+				if((i == 0 && j == 2) || (i == 0 && j == 5))
 				{
 					
 					tile.setIcon(new ImageIcon(wbishop));
 					piece[i][j] = whiteBishop;
-					
-				}
-				if(i == 0 && j == 5)
-				{
-					
-					tile.setIcon(new ImageIcon(wbishop));
-					piece[i][j] = whiteBishop2;
 					
 				}
 				if((i == 7 && j == 2) || (i == 7 && j == 5))

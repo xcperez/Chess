@@ -76,15 +76,10 @@ public class GameManager{//singleton
 		Rook whiteRook = new Rook("White");
 		Rook whiteRook2	= new Rook("White");
 		Rook blackRook = new Rook("Black");
-		Rook blackRook2 = new Rook("Black");
 		Knight whiteKnight = new Knight("White");
-		Knight whiteKnight2 = new Knight("White");
 		Knight blackKnight = new Knight("Black");
-		Knight blackKnight2 = new Knight("Black");
 		Bishop whiteBishop = new Bishop("White");
-		Bishop whiteBishop2	= new Bishop("White");
 		Bishop blackBishop = new Bishop("Black");
-		Bishop blackBishop2 = new Bishop("Black");
 		Queen whiteQueen = new Queen("White");
 		Queen blackQueen = new Queen("Black");
 		King whiteKing = new King("White");
@@ -181,53 +176,32 @@ public class GameManager{//singleton
 				{
 					
 					tile.setIcon(new ImageIcon(brook));
-					piece[i][j] = blackRook2;
+					piece[i][j] = blackRook;
 				}
 				
 				//knights
-				if(i == 0 && j == 1)
+				if((i == 0 && j == 1) || (i == 0 && j == 6))
 				{
 					
 					tile.setIcon(new ImageIcon(wknight));
 					piece[i][j] = whiteKnight;
 				}
-				if(i == 0 && j == 6)
-				{
-					
-					tile.setIcon(new ImageIcon(wknight));
-					piece[i][j] = whiteKnight2;
-					
-				}
-				if(i == 7 && j == 1)
+				else if((i == 7 && j == 1) || (i == 7 && j == 6))
 				{
 					
 					tile.setIcon(new ImageIcon(bknight));
 					piece[i][j] = blackKnight;
 					
 				}
-				if(i == 7 && j == 6)
-				{
-					
-					tile.setIcon(new ImageIcon(bknight));
-					piece[i][j] = blackKnight2;
-				}
 				
 				//bishops
-				if(i == 0 && j == 2)
+				if((i == 0 && j == 2) || (i == 0 && j == 5))
 				{
 					
 					tile.setIcon(new ImageIcon(wbishop));
 					piece[i][j] = whiteBishop;
-					
 				}
-				if(i == 0 && j == 5)
-				{
-					
-					tile.setIcon(new ImageIcon(wbishop));
-					piece[i][j] = whiteBishop2;
-					
-				}
-				if((i == 7 && j == 2) || (i == 7 && j == 5))
+				else if((i == 7 && j == 2) || (i == 7 && j == 5))
 				{
 					
 					tile.setIcon(new ImageIcon(bbishop));

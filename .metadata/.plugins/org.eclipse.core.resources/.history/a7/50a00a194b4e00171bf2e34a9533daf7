@@ -237,7 +237,7 @@ public abstract class Piece { // decorator
 			
 		case "WhiteBishop":
 			
-			if(((x - xp) == ( y - yp)))//forward +, sideways +
+			/*if(((x - xp) == ( y - yp)))//forward +, sideways +
 			{
 				
 				piece[x][y] = new Bishop("White");
@@ -255,7 +255,7 @@ public abstract class Piece { // decorator
 				
 			}
 			
-			break; 
+			break; */
 		}
 		
 	}

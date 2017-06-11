@@ -151,7 +151,7 @@ public abstract class Piece { // decorator
 					System.out.println("Not a valid move.");
 				}
 			}
-			break;
+			
 		case "WhiteRook":
 			
 			if(x > xp && y == yp)
@@ -192,7 +192,6 @@ public abstract class Piece { // decorator
 				
 				System.out.println("Not a valid move.");
 			}
-			break;
 		case "BlackRook":
 			
 			if(x > xp && y == yp)
@@ -255,7 +254,7 @@ public abstract class Piece { // decorator
 				
 			}
 			
-			break; 
+			
 		}
 		
 	}
